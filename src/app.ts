@@ -4,13 +4,15 @@ import config from "../config.json";
 
 type Resident = {
   name: string;
+  nameInitial: string;
   room: string;
 };
 
 function main() {
   const txt = fs
     .readFileSync(path.join(__dirname, "..", "names.csv"))
-    .toString("ascii");
+    .toString("ascii")
+    .trim();
 
   const lines = txt.split("\n");
 
@@ -53,8 +55,14 @@ function makeUrls(residents: Resident[]): string[] {
   for (let i = 0; i < residents.length; i++) {
     const { name, room } = residents[i];
     const letter = config.password.charAt(i);
-    const prev = i === 0 ? undefined : residents[i - 1].room;
-    const next = i === residents.length - 1 ? undefined : residents[i + 1].room;
+    const prev =
+      i === 0
+        ? undefined
+        : `${residents[i - 1].room} (${residents[i - 1].nameInitial})`;
+    const next =
+      i === residents.length - 1
+        ? undefined
+        : `${residents[i + 1].room} (${residents[i + 1].nameInitial})`;
 
     out.push(makeUrl(name, letter, room, prev, next));
   }
@@ -109,15 +117,19 @@ function makeResidentObjs(rawLines: string[]): Resident[] {
     }
 
     let name: string;
+    let nameInitial: string;
 
     if (fields[0] === "") {
       name = fields[1];
+      nameInitial = name;
     } else {
       name = `${fields[1]} ${fields[0]}`;
+      nameInitial = `${fields[1]} ${fields[0].charAt(0).trim()}.`;
     }
 
     out.push({
       name: name.trim(),
+      nameInitial: nameInitial,
       room: fields[2].trim(),
     });
   }
