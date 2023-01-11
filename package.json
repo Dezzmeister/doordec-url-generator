@@ -1,0 +1,16 @@
+{
+  "name": "doordec-url-generator",
+  "version": "1.0.0",
+  "description": "Generate URLs for door dec puzzle",
+  "main": "src/app.ts",
+  "scripts": {
+    "start": "npx ts-node src/app.ts"
+  },
+  "author": "Joe Desmond <joe@obama69.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^18.11.18",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
+  }
+}

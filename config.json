@@ -1,0 +1,13 @@
+{
+  "password": "abc",
+  "longToShort": {
+    "name": "_",
+    "letter": ".",
+    "room": "7",
+    "prev": "-",
+    "next": "|",
+    "color": ":"
+  },
+  "colors": 5,
+  "prefix": "http://localhost:3000/9/"
+}
